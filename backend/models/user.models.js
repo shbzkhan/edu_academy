@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import bcrypt from "bcryptjs"
 
 const userSchema = new Schema(
   {
@@ -15,11 +16,21 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user"
+    },
+    
+    isVerified: {
+      type: Boolean,
+      default:false
+    },
+
     avatar: {
       type: String,
-      required: true,
         },
-        courses: [
+      courses: [
             {
                 type: Schema.Types.ObjectId,
                 ref:"courses"
